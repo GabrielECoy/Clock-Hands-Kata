@@ -48,7 +48,12 @@ namespace Clock
             angle.Should().Be(180);
         }
 
-
+        [TestMethod]
+        public void angleBetweenHandles195and180Return15()
+        {
+            var angle = ClockHands.GetAngleBetweenHandlesInDegrees(195,180);
+            angle.Should().Be(15);
+        }
 
     }
 }
