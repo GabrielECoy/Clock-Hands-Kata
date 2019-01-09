@@ -6,7 +6,10 @@ namespace Clock
     {
         public static decimal GetAngleInDegrees(int hour, int minute)
         {
-            return 0;
+            int hourHandleAngle;
+            hourHandleAngle = (360 / 12) * hour;
+
+            return hourHandleAngle;
         }
     }
 }
