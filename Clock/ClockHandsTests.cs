@@ -27,5 +27,21 @@ namespace Clock
             angle.Should().Be(15);
         }
 
+        [TestMethod]
+        public void hourHandlesHourSix30ShouldReturn180()
+        {
+            var angle = ClockHands.GetHourAngleHourInDegrees(6);
+            angle.Should().Be(180);
+        }
+
+        [TestMethod]
+        public void hourHandlesMinute30ShouldReturn15()
+        {
+            var angle = ClockHands.GetHourAngleMinuteInDegrees(30);
+            angle.Should().Be(15);
+        }
+
+
+
     }
 }
