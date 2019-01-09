@@ -19,5 +19,13 @@ namespace Clock
             var angle = ClockHands.GetAngleInDegrees(6, 0);
             angle.Should().Be(180);
         }
+
+        [TestMethod]
+        public void six30ShouldReturn15()
+        {
+            var angle = ClockHands.GetAngleInDegrees(6, 30);
+            angle.Should().Be(15);
+        }
+
     }
 }
