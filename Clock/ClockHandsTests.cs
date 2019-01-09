@@ -41,6 +41,13 @@ namespace Clock
             angle.Should().Be(15);
         }
 
+        [TestMethod]
+        public void minuteHandles30ShouldReturn180()
+        {
+            var angle = ClockHands.GetMinuteAngleInDegrees(30);
+            angle.Should().Be(180);
+        }
+
 
 
     }

@@ -7,7 +7,7 @@ namespace Clock
         public static decimal GetAngleInDegrees(int hour, int minute)
         {
             var hourHandleAngle = GetHourAngleHourInDegrees(hour) + GetHourAngleMinuteInDegrees((minute));
-            var minuteHandleAngle = (360 / 60) * minute;
+            var minuteHandleAngle = GetMinuteAngleInDegrees(minute);
 
             var angleBetweenHandles = hourHandleAngle - minuteHandleAngle;
             return angleBetweenHandles;
@@ -26,6 +26,14 @@ namespace Clock
             var hourHandleMinuteAngle = (int) Math.Ceiling(minuteAngle * minute);
 
             return hourHandleMinuteAngle;
+        }
+
+        public static decimal GetMinuteAngleInDegrees(int minute)
+        {
+            double minuteAngle = (double)360 / 60;
+            var minuteHandleAngle = (int)Math.Ceiling(minuteAngle * minute);
+            
+            return minuteHandleAngle;
         }
     }
 }
