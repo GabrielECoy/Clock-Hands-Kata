@@ -4,6 +4,10 @@ namespace Clock
 {
     public class ClockHands
     {
+        private const double totalDegreesInClock = 360;
+        private const int totalHoursInClock = 12;
+        private const int totalMinutesInHour = 60;
+
         public static double GetAngleInDegrees(int hour, int minute)
         {
             var hourHandleAngle = GetHourAngleHourInDegrees(hour) + GetHourAngleMinuteInDegrees((minute));
@@ -13,16 +17,16 @@ namespace Clock
             return angleBetweenHandles;
         }
 
-        public static int GetHourAngleHourInDegrees(int hour)
+        public static double GetHourAngleHourInDegrees(int hour)
         {
-            var hourHandleHourAngle = (360 / 12) * hour;
+            var hourHandleHourAngle = (totalDegreesInClock / totalHoursInClock) * hour;
 
             return hourHandleHourAngle;
         }
 
         public static double GetHourAngleMinuteInDegrees(int minute)
         {
-            double minuteAngle = (double) 360 / (double) 12 / 60;
+            double minuteAngle = totalDegreesInClock / (double) totalHoursInClock / totalMinutesInHour;
             var hourHandleMinuteAngle = minuteAngle * minute;
 
             return hourHandleMinuteAngle;
@@ -30,7 +34,7 @@ namespace Clock
 
         public static double GetMinuteAngleInDegrees(int minute)
         {
-            double minuteAngle = (double)360 / 60;
+            double minuteAngle = totalDegreesInClock / totalMinutesInHour;
             var minuteHandleAngle = minuteAngle * minute;
             
             return minuteHandleAngle;
@@ -39,12 +43,15 @@ namespace Clock
         public static double GetAngleBetweenHandlesInDegrees(double hourHandleAngle, double minutesHandleAngle)
         {
             var angleBetweenHandles = Math.Abs(hourHandleAngle - minutesHandleAngle);
-            if (angleBetweenHandles > 180)
+            var otherAngleBetweenHandle = totalDegreesInClock - angleBetweenHandles;
+            if (angleBetweenHandles < totalDegreesInClock - angleBetweenHandles)
             {
-                angleBetweenHandles = 360 - angleBetweenHandles;
+                return angleBetweenHandles;
             }
-
-            return angleBetweenHandles;
+            else
+            {
+                return otherAngleBetweenHandle;
+            }
         }
     }
 }
