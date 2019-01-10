@@ -4,7 +4,7 @@ namespace Clock
 {
     public class ClockHands
     {
-        public static decimal GetAngleInDegrees(int hour, int minute)
+        public static double GetAngleInDegrees(int hour, int minute)
         {
             var hourHandleAngle = GetHourAngleHourInDegrees(hour) + GetHourAngleMinuteInDegrees((minute));
             var minuteHandleAngle = GetMinuteAngleInDegrees(minute);
@@ -20,25 +20,29 @@ namespace Clock
             return hourHandleHourAngle;
         }
 
-        public static int GetHourAngleMinuteInDegrees(int minute)
+        public static double GetHourAngleMinuteInDegrees(int minute)
         {
             double minuteAngle = (double) 360 / (double) 12 / 60;
-            var hourHandleMinuteAngle = (int) Math.Ceiling(minuteAngle * minute);
+            var hourHandleMinuteAngle = minuteAngle * minute;
 
             return hourHandleMinuteAngle;
         }
 
-        public static int GetMinuteAngleInDegrees(int minute)
+        public static double GetMinuteAngleInDegrees(int minute)
         {
             double minuteAngle = (double)360 / 60;
-            var minuteHandleAngle = (int)Math.Ceiling(minuteAngle * minute);
+            var minuteHandleAngle = minuteAngle * minute;
             
             return minuteHandleAngle;
         }
 
-        public static int GetAngleBetweenHandlesInDegrees(int hourHandleAngle, int minutesHandleAngle)
+        public static double GetAngleBetweenHandlesInDegrees(double hourHandleAngle, double minutesHandleAngle)
         {
-            var angleBetweenHandles = hourHandleAngle - minutesHandleAngle;
+            var angleBetweenHandles = Math.Abs(hourHandleAngle - minutesHandleAngle);
+            if (angleBetweenHandles > 180)
+            {
+                angleBetweenHandles = 360 - angleBetweenHandles;
+            }
 
             return angleBetweenHandles;
         }
